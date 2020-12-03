@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show Teacher</h2>
+<table>
+    <tr>
+        <th>Teacher Name</th>
+        <th>Employee Number</th>
+        <th>Hire Date</th>
+        <th>Salary</th>
+    </tr>
+    <tr>
+        <td>@ViewBag.Teacher.TeacherFname @ViewBag.Teacher.TeacherLname</td>
+        <td>@ViewBag.Teacher.EmployeeNumber</td>
+        <td>@ViewBag.Teacher.HireDate</td>
+        <td>@ViewBag.Teacher.Salary</td>
+    </tr>
+</table>
+<h3>Classes taught by @ViewBag.Teacher.TeacherFname @ViewBag.Teacher.TeacherLname</h3>
+<ul>
+    @foreach (var Class in ViewBag.Class)
+    {
+    
+        if (Class.ClassName == "")
+        {
+            <li>None</li>
+        }
+    <li>@Class.ClassName</li>
+    }
+</ul>
+
