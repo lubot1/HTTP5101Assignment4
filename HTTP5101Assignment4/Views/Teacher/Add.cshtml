@@ -1,0 +1,19 @@
+﻿@model HTTP5101Assignment4.Models.Teacher
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add a teacher</h2>
+
+<form method="POST" action="/Teacher/Create">
+    <label for="TeacherFname">Teacher first name: </label>
+    <input type="text" id="TeacherFname" name="TeacherFname" />
+    <label for="TeacherLname">Teacher last name: </label>
+    <input type="text" id="TeacherLname" name="TeacherLname" />
+    <label for="EmployeeNumber">Employee number: </label>
+    <input type="text" id="EmployeeNumber" name="EmployeeNumber" />
+    <label for="Salary">Salary: </label>
+    <input type="text" id="Salary" name="Salary" />
+    <input type="submit" id="SubmitBtn" />
+</form>

@@ -37,14 +37,25 @@ namespace HTTP5101Assignment4.Controllers
             TeacherDataController controller = new TeacherDataController();
             controller.DeleteTeacher(id);
             return RedirectToAction("List");
-
         }
 
         public ActionResult Add()
         {
-            TeacherDataController controller = new TeacherDataController();
-
             return View();
+        }
+        // POST : /Teacher/Create
+        public ActionResult Create(String TeacherFname, String TeacherLname, String EmployeeNumber, decimal Salary)
+        {
+            Teacher NewTeacher = new Teacher();
+            NewTeacher.TeacherFname = TeacherFname;
+            NewTeacher.TeacherLname = TeacherLname;
+            NewTeacher.EmployeeNumber = EmployeeNumber;
+            NewTeacher.Salary = Salary;
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.AddTeacher(NewTeacher);
+
+            return RedirectToAction("List");
         }
     }
 }

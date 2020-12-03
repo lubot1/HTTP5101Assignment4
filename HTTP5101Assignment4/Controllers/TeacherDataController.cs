@@ -103,7 +103,7 @@ namespace HTTP5101Assignment4.Controllers
             Conn.Open();
             //Creates a new MySql command object
             MySqlCommand cmd = Conn.CreateCommand();
-            cmd.CommandText = "DELETE FROM `teachers` WHERE id=@id";
+            cmd.CommandText = "DELETE FROM `teachers` WHERE teacherid=@id";
             //Adds value of id to query safely
             cmd.Parameters.AddWithValue("@id", id);
             cmd.Prepare();
@@ -118,13 +118,25 @@ namespace HTTP5101Assignment4.Controllers
         /// <param name="NewTeacher"></param>
         /// <returns></returns>
         [HttpPost]
-        public Teacher AddTeacher(Teacher NewTeacher)
+        public void AddTeacher(Teacher NewTeacher)
         {
             MySqlConnection Conn = School.AccessDatabase();
             //Opens connection to the database
             Conn.Open();
             //Creates a new MySql command object
             MySqlCommand cmd = Conn.CreateCommand();
+            cmd.CommandText = "INSERT INTO `teachers` (teacherfname,teacherlname,employeenumber,salary,hiredate) VALUES " +
+                "(@TeacherFname,@TeacherLname,@EmployeeNumber,@Salary,CURRENT_DATE())";
+            //Adds value of id to query safely
+            cmd.Parameters.AddWithValue("@TeacherFname", NewTeacher.TeacherFname);
+            cmd.Parameters.AddWithValue("@TeacherLname", NewTeacher.TeacherLname);
+            cmd.Parameters.AddWithValue("@EmployeeNumber", NewTeacher.EmployeeNumber);
+            cmd.Parameters.AddWithValue("@Salary", NewTeacher.Salary);
+
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+
+            Conn.Close();
         }
     }
 }
