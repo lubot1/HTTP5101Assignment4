@@ -95,6 +95,10 @@ namespace HTTP5101Assignment4.Controllers
         /// Function to delete teacher entries in database
         /// </summary>
         /// <param name="id">Teacher id that will be deleted</param>
+        /// <example>
+        /// POST ---> /Teacher/Delete
+        /// Data: int id
+        /// </example>
         [HttpPost]
         public void DeleteTeacher(int id)
         {
@@ -115,16 +119,21 @@ namespace HTTP5101Assignment4.Controllers
         /// <summary>
         /// Adds a teacher to the database using data provided in a form
         /// </summary>
-        /// <param name="NewTeacher"></param>
-        /// <returns></returns>
+        /// <param name="NewTeacher">Teacher object that is passed to the function</param>
+        /// <returns>Void</returns>
+        /// <example>
+        /// POST ---> /Teacher/Create
+        /// Data: NewTeacher.TeacherFname,NewTeacher.TeacherLname,NewTeacher.EmployeeNumber,NewTeacher.Salary
+        /// </example>
         [HttpPost]
-        public void AddTeacher(Teacher NewTeacher)
+        public void AddTeacher([FromBody]Teacher NewTeacher)
         {
             MySqlConnection Conn = School.AccessDatabase();
             //Opens connection to the database
             Conn.Open();
             //Creates a new MySql command object
             MySqlCommand cmd = Conn.CreateCommand();
+            //Query uses MySql CURRENT_DATE() method to generate hire date
             cmd.CommandText = "INSERT INTO `teachers` (teacherfname,teacherlname,employeenumber,salary,hiredate) VALUES " +
                 "(@TeacherFname,@TeacherLname,@EmployeeNumber,@Salary,CURRENT_DATE())";
             //Adds value of id to query safely

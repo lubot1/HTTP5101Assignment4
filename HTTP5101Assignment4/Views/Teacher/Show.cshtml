@@ -4,33 +4,45 @@
 }
 
 <h2>Show Teacher</h2>
-<table>
-    <tr>
-        <th>Teacher Name</th>
-        <th>Employee Number</th>
-        <th>Hire Date</th>
-        <th>Salary</th>
+<nav>
+    <a href="/Teacher/List" class="navbar-link">Go back to listing</a>
+</nav>
+<table class="table">
+    <tr scope="row">
+        <th scope="col">Teacher Name</th>
+        <th scope="col">Employee Number</th>
+        <th scope="col">Hire Date</th>
+        <th scope="col">Salary</th>
     </tr>
-    <tr>
-        <td>@ViewBag.Teacher.TeacherFname @ViewBag.Teacher.TeacherLname</td>
-        <td>@ViewBag.Teacher.EmployeeNumber</td>
-        <td>@ViewBag.Teacher.HireDate</td>
-        <td>@ViewBag.Teacher.Salary</td>
+    <tr scope="row">
+        <td scope="col">@ViewBag.Teacher.TeacherFname @ViewBag.Teacher.TeacherLname</td>
+        <td scope="col">@ViewBag.Teacher.EmployeeNumber</td>
+        <td scope="col">@ViewBag.Teacher.HireDate</td>
+        <td scope="col">@ViewBag.Teacher.Salary</td>
     </tr>
 </table>
+
 <h3>Classes taught by @ViewBag.Teacher.TeacherFname @ViewBag.Teacher.TeacherLname</h3>
 <ul>
     @foreach (var Class in ViewBag.Class)
     {
-    
+
         if (Class.ClassName == "")
         {
             <li>None</li>
         }
-    <li>@Class.ClassName</li>
+        <li>@Class.ClassName</li>
     }
 </ul>
-<nav>
-    <a href="/Teacher/Delete/@ViewBag.Teacher.Teacherid">Delete Teacher</a>
-</nav>
 
+<form name="DeleteBtn" method="post" action="/Teacher/Delete/@ViewBag.Teacher.Teacherid">
+    <button type="button" class="btn btn-danger" id="DeleteBtn" value="Delete"/>
+    <h3 id="ConfirmMessage" style="display: none;">Are you sure?</h3>
+    <div id="Confirmation Wrapper" style="display: flex; flex-direction: row;">
+        <input type="button" class="btn btn-outline-primary " id="GoBack" value="Go back" style="display: none;" />
+        <input type="submit" class="btn btn-danger" value="Delete" id="FinalDelete" style="display: none;" />
+    </div>
+</form>
+
+<script type="text/javascript" src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="~/Scripts/DeleteConfirmation.js"></script>
